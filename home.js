@@ -1,40 +1,4 @@
-let foodData = []
-
-
-// Example: Fetch JSON data from an API and wait for the response
-async function getData() {
-    const url = "http://127.0.0.1:5000/foods";
-
-    try {
-        // Send GET request and wait for the response
-        const response = await fetch(url);
-
-        // Check if HTTP status is OK (200–299)
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        // Wait for the body to be parsed as JSON
-        const raw = await response.json();
-
-           foodData = raw.map(food => ({
-            id: food.food_id,
-            name: food.food_name,
-            price: food.food_price,
-            type: food.food_type,
-            description: food.description,
-            popular: food.popular,
-            popularity: food.popularity
-        }));
-
-        console.log("Data received:", foodData);
-          renderFoodCards();   // <-- ADD THIS
-    } catch (error) {
-        console.error("Request failed:", error.message);
-    }
-}
-
-getData();
+let foodData = [];
 
 
   
@@ -89,8 +53,32 @@ const toastMessage = document.getElementById('toast-message');
 
 
 // ===== Initialize Application =====
-document.addEventListener('DOMContentLoaded', async function() {   // Then render cards
-
+document.addEventListener('DOMContentLoaded', async function() {
+    try {
+        const response = await fetch('api/food.json');
+        if (response.ok) {
+            foodData = await response.json();
+        } else {
+            console.error('Failed to load food data');
+            throw new Error('Fallback to local data');
+        }
+    } catch (error) {
+        console.error('Error fetching food data:', error);
+        // Fallback for when opened via file:// protocol
+        foodData = [
+            { "id": 1, "name": "Masala Dosa", "price": 120, "type": "veg", "description": "Crispy rice crepe filled with spiced potato curry.", "ingredients": "Rice batter, potatoes, onions, spices, ghee.", "image": "public/images/masala_dosa.png", "popular": true, "popularity": 95 },
+            { "id": 2, "name": "Butter Chicken", "price": 350, "type": "non-veg", "description": "Tender chicken cooked in a rich and creamy tomato-butter sauce.", "ingredients": "Chicken, tomatoes, butter, cream, Indian spices.", "image": "public/images/butter_chicken.png", "popular": true, "popularity": 98 },
+            { "id": 3, "name": "Paneer Tikka", "price": 220, "type": "veg", "description": "Marinated cottage cheese cubes grilled to perfection.", "ingredients": "Paneer, yogurt, bell peppers, onions, tikka spices.", "image": "public/images/paneer_tikka.png", "popular": false, "popularity": 85 },
+            { "id": 4, "name": "Hyderabadi Biryani", "price": 280, "type": "non-veg", "description": "Fragrant basmati rice slow-cooked with marinated chicken and aromatic spices.", "ingredients": "Basmati rice, chicken, yogurt, saffron, biryani spices.", "image": "public/images/hyderabadi_biryani.png", "popular": true, "popularity": 99 },
+            { "id": 5, "name": "Dal Makhani", "price": 180, "type": "veg", "description": "Slow-cooked black lentils and kidney beans enriched with butter and cream.", "ingredients": "Black lentils, kidney beans, butter, cream, spices.", "image": "public/images/dal_makhani.png", "popular": false, "popularity": 88 },
+            { "id": 6, "name": "Mutton Rogan Josh", "price": 450, "type": "non-veg", "description": "Aromatic lamb dish of Persian origin.", "ingredients": "Mutton, yogurt, Kashmiri chilies, spices.", "image": "public/images/mutton_rogan_josh.png", "popular": false, "popularity": 80 },
+            { "id": 7, "name": "Chole Bhature", "price": 150, "type": "veg", "description": "Spicy chickpea curry served with fried bread.", "ingredients": "Chickpeas, spices, maida flour, onions, tomatoes.", "image": "public/images/chole_bhature.png", "popular": true, "popularity": 90 },
+            { "id": 8, "name": "Tandoori Roti", "price": 30, "type": "veg", "description": "Traditional Indian flatbread.", "ingredients": "Whole wheat flour, water, salt.", "image": "public/images/tandoori_roti.png", "popular": false, "popularity": 70 },
+            { "id": 9, "name": "Chicken Tikka Masala", "price": 380, "type": "non-veg", "description": "Roasted chicken chunks in a spicy curry sauce.", "ingredients": "Chicken, yogurt, spices, tomato puree, cream.", "image": "public/images/chicken_tikka_masala.png", "popular": true, "popularity": 92 },
+            { "id": 10, "name": "Gulab Jamun", "price": 80, "type": "veg", "description": "Deep-fried milk dumplings soaked in rose-scented sugar syrup.", "ingredients": "Milk solids, flour, sugar, rose water, cardamom.", "image": "public/images/gulab_jamun.png", "popular": true, "popularity": 96 }
+        ];
+    }
+    renderFoodCards();
     updateCartCount();
     loadProfile();
     setupEventListeners();
@@ -312,13 +300,13 @@ function createFoodCard(food) {
     return `
         <div class="food-card" data-id="${food.id}">
             <div class="food-card-image">
-                <img src="https://gimmerecipe.com/wp-content/uploads/2024/09/Authentic-South-Indian-Masala-Dosa-Recipe.webp" alt="${food.food_name}">
+                <img src="${food.image}" alt="${food.name}">
                 <div class="food-type-indicator ${food.type}"></div>
                 ${food.popular ? '<span class="popularity-badge">Popular</span>' : ''}
             </div>
             <div class="food-card-content">
                 <h3 class="food-card-name">${food.name}</h3>
-                <p class="food-card-type">${food.type === 'Veg' ? 'Vegetarian' : 'Non-Vegetarian'}</p>
+                <p class="food-card-type">${food.type === 'veg' ? 'Vegetarian' : 'Non-Vegetarian'}</p>
                 <div class="food-card-footer">
                     <span class="food-card-price">&#8377;${food.price}</span>
                     <button class="food-card-add-btn" data-id="${food.id}">Add</button>
@@ -326,7 +314,6 @@ function createFoodCard(food) {
             </div>
         </div>
     `;
-     console.log("created",food);
 }
 
 function filterFoods() {

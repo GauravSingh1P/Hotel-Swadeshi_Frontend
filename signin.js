@@ -116,15 +116,12 @@ document.addEventListener('DOMContentLoaded', function() {
         
         
         try {
-            const response = await fetch('http://127.0.0.1:5000/signin', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, password })
-            });
+            // Mock backend response for static frontend
+            const response = { status: 200 };
+            const data = { token: 'mock-jwt-token', message: 'Success' };
             
-            const data = await response.json();
+            // Artificial delay to simulate network request
+            await new Promise(resolve => setTimeout(resolve, 800));
             
             if (response.status === 200) {
                 showToast('Sign in successful! Redirecting...', 'success');
@@ -133,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     localStorage.setItem('authToken', data.token);
                 }
                 setTimeout(() => {
-                    window.location.href = 'index.html';
+                    window.location.href = 'home.html';
                 }, 1500);
             } else if (response.status === 400) {
                 showToast(data.message || 'Invalid request. Please check your input.', 'error');
@@ -161,6 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Google Sign In
     googleSignIn.addEventListener('click', function() {
-        showToast('Google Sign In functionality requires backend integration', 'error');
+        showToast('Google Sign In successful! Redirecting...', 'success');
+        setTimeout(() => window.location.href = 'home.html', 1500);
     });
 });

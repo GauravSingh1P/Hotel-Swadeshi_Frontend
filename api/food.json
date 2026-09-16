@@ -1,0 +1,112 @@
+[
+    {
+        "id": 1,
+        "name": "Masala Dosa",
+        "price": 120,
+        "type": "veg",
+        "description": "Crispy rice crepe filled with spiced potato curry.",
+        "ingredients": "Rice batter, potatoes, onions, spices, ghee.",
+        "image": "public/images/masala_dosa.png",
+        "popular": true,
+        "popularity": 95
+    },
+    {
+        "id": 2,
+        "name": "Butter Chicken",
+        "price": 350,
+        "type": "non-veg",
+        "description": "Tender chicken cooked in a rich and creamy tomato-butter sauce.",
+        "ingredients": "Chicken, tomatoes, butter, cream, Indian spices.",
+        "image": "public/images/butter_chicken.png",
+        "popular": true,
+        "popularity": 98
+    },
+    {
+        "id": 3,
+        "name": "Paneer Tikka",
+        "price": 220,
+        "type": "veg",
+        "description": "Marinated cottage cheese cubes grilled to perfection.",
+        "ingredients": "Paneer, yogurt, bell peppers, onions, tikka spices.",
+        "image": "public/images/paneer_tikka.png",
+        "popular": false,
+        "popularity": 85
+    },
+    {
+        "id": 4,
+        "name": "Hyderabadi Biryani",
+        "price": 280,
+        "type": "non-veg",
+        "description": "Fragrant basmati rice slow-cooked with marinated chicken and aromatic spices.",
+        "ingredients": "Basmati rice, chicken, yogurt, saffron, biryani spices.",
+        "image": "public/images/hyderabadi_biryani.png",
+        "popular": true,
+        "popularity": 99
+    },
+    {
+        "id": 5,
+        "name": "Dal Makhani",
+        "price": 180,
+        "type": "veg",
+        "description": "Slow-cooked black lentils and kidney beans enriched with butter and cream.",
+        "ingredients": "Black lentils, kidney beans, butter, cream, spices.",
+        "image": "public/images/dal_makhani.png",
+        "popular": false,
+        "popularity": 88
+    },
+    {
+        "id": 6,
+        "name": "Mutton Rogan Josh",
+        "price": 450,
+        "type": "non-veg",
+        "description": "Aromatic lamb dish of Persian origin, which is one of the signature recipes of Kashmiri cuisine.",
+        "ingredients": "Mutton, yogurt, Kashmiri chilies, spices.",
+        "image": "public/images/mutton_rogan_josh.png",
+        "popular": false,
+        "popularity": 80
+    },
+    {
+        "id": 7,
+        "name": "Chole Bhature",
+        "price": 150,
+        "type": "veg",
+        "description": "Spicy chickpea curry served with fried bread.",
+        "ingredients": "Chickpeas, spices, maida flour, onions, tomatoes.",
+        "image": "public/images/chole_bhature.png",
+        "popular": true,
+        "popularity": 90
+    },
+    {
+        "id": 8,
+        "name": "Tandoori Roti",
+        "price": 30,
+        "type": "veg",
+        "description": "Traditional Indian flatbread baked in a clay oven.",
+        "ingredients": "Whole wheat flour, water, salt.",
+        "image": "public/images/tandoori_roti.png",
+        "popular": false,
+        "popularity": 70
+    },
+    {
+        "id": 9,
+        "name": "Chicken Tikka Masala",
+        "price": 380,
+        "type": "non-veg",
+        "description": "Roasted chicken chunks in a spicy curry sauce.",
+        "ingredients": "Chicken, yogurt, spices, tomato puree, cream.",
+        "image": "public/images/chicken_tikka_masala.png",
+        "popular": true,
+        "popularity": 92
+    },
+    {
+        "id": 10,
+        "name": "Gulab Jamun",
+        "price": 80,
+        "type": "veg",
+        "description": "Deep-fried milk dumplings soaked in rose-scented sugar syrup.",
+        "ingredients": "Milk solids, flour, sugar, rose water, cardamom.",
+        "image": "public/images/gulab_jamun.png",
+        "popular": true,
+        "popularity": 96
+    }
+]

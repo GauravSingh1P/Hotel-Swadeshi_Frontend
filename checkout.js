@@ -363,44 +363,9 @@ function handleFormSubmit(event) {
 
 // Asynchronously dispatch orders to Flask MySQL Backend for full-stack integration
 async function saveOrdersToBackend(orderObj) {
-    console.log("Saving order to backend MySQL...", orderObj);
-    
-    // Flask database schema requires: item_id, quantity, ordered_by, ordered_at, location
-    // We will attempt to POST each item in the order to the backend
-    const custId = localStorage.getItem("cust_id") || 1; // Default back to customer 1 if mock mode
-    const location = orderObj.deliveryAddress;
-
-    // Fire API requests in parallel for each cart item
-    const requests = orderObj.items.map(item => {
-        return fetch("http://127.0.0.1:5000/order", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                item_id: item.id,
-                cust_id: parseInt(custId),
-                location: location,
-                quantity: parseInt(item.quantity)
-            })
-        }).then(res => {
-            if (!res.ok) {
-                throw new Error(`Failed to save item ID ${item.id} to db`);
-            }
-            return res.json();
-        }).catch(err => {
-            // Log error silently, fallback gracefully to offline/local mode
-            console.warn("MySQL backend POST failed (local fallback active):", err.message);
-            return null;
-        });
-    });
-
-    try {
-        await Promise.all(requests);
-        console.log("Successfully persisted order in MySQL Database.");
-    } catch (e) {
-        console.warn("Failed to persist order in MySQL DB. Falling back to local offline mode.");
-    }
+    console.log("Saving order locally (static frontend mode)...", orderObj);
+    // Backend API fetch has been temporarily disabled until backend is deployed
+    return Promise.resolve();
 }
 
 // ===== Toast Alert helper =====

@@ -167,15 +167,12 @@ document.addEventListener('DOMContentLoaded', function() {
         verifyBtn.disabled = true;
         
         try {
-            const response = await fetch('http://127.0.0.1:5000/verify_email', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, otp })
-            });
+            // Mock backend response for static frontend
+            const response = { status: 200 };
+            const data = { token: 'mock-jwt-token', message: 'Success' };
             
-            const data = await response.json();
+            // Artificial delay to simulate network request
+            await new Promise(resolve => setTimeout(resolve, 800));
             
             if (response.status === 200) {
                 showToast('Email verified successfully! Redirecting...', 'success');
@@ -221,15 +218,12 @@ document.addEventListener('DOMContentLoaded', function() {
         otpError.textContent = '';
         
         try {
-            const response = await fetch('http://127.0.0.1:5000/resend-otp', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email })
-            });
+            // Mock backend response for static frontend
+            const response = { status: 200 };
+            const data = { message: 'Success' };
             
-            const data = await response.json();
+            // Artificial delay to simulate network request
+            await new Promise(resolve => setTimeout(resolve, 800));
             
             if (response.status === 200) {
                 showToast('Verification code resent successfully!', 'success');

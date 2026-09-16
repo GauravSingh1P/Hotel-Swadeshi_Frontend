@@ -155,15 +155,12 @@ document.addEventListener('DOMContentLoaded', function() {
         submitBtn.disabled = true;
         
         try {
-            const response = await fetch('http://127.0.0.1:5000/signup', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, password })
-            });
+            // Mock backend response for static frontend
+            const response = { status: 200 };
+            const data = { message: 'Success' };
             
-            const data = await response.json();
+            // Artificial delay to simulate network request
+            await new Promise(resolve => setTimeout(resolve, 800));
             
             if (response.status === 200) {
                 showToast('Account created successfully! Redirecting...', 'success');
@@ -193,6 +190,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Google Sign Up
     googleSignUp.addEventListener('click', function() {
-        showToast('Google Sign Up functionality requires backend integration', 'error');
+        showToast('Account created with Google! Redirecting...', 'success');
+        setTimeout(() => window.location.href = 'verify.html', 1500);
     });
 });
